@@ -7,7 +7,7 @@ def main():
 
     # Conditions for initial print.
     if n == 1:
-        print("{:d} argument.".format(n - 1), end="\n")
+        print("{:d} arguments".format(n - 1), end="\n")
     elif n == 2:
         print("{:d} argument:".format(n - 1), end="\n")
     else:
