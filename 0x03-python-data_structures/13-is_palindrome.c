@@ -13,11 +13,7 @@ int is_palindrome(listint_t **head)
 	if (*head == NULL || temp->next == NULL)
 		return (1);
 
-	while (temp != NULL)
-	{
-		list_len++;
-		temp = temp->next;
-	}
+	list_len = len_list(head);
 
 	for (i = 0; i < (list_len / 2); i++)
 	{
@@ -43,4 +39,24 @@ int get_value_at_index(listint_t **head, int idx)
 	for (i = 0; i < idx; i++)
 		temp = temp->next;
 	return (temp->n);
+}
+
+/**
+ * len_list - Length of linked list
+ * @head: Linked list
+ * Return: Length of linked list
+*/
+int len_list(listint_t **head)
+{
+	listint_t *temp = *head;
+	int cnt = 0;
+
+	if (*head == NULL)
+		return (0);
+	while (temp != NULL)
+	{
+		cnt++;
+		temp = temp->next;
+	}
+	return (cnt);
 }
