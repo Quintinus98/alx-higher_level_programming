@@ -24,7 +24,6 @@ listint_t *add_nodeint_end(listint_t **head, const int n);
 void free_listint(listint_t *head);
 
 int get_value_at_index(listint_t **head, int idx);
-int len_list(listint_t **head);
 
 int is_palindrome(listint_t **head);
 
