@@ -7,31 +7,28 @@
 */
 int is_palindrome(listint_t **head)
 {
-	listint_t *temp = *head;
-	int i, start, end, list_len;
+	int i, len;
 
-	if (*head == NULL || temp->next == NULL)
+	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
-	list_len = len_list(head);
+	len = len_list(head);
 
-	for (i = 0; i < (list_len / 2); i++)
+	for (i = 0; i < (len / 2); i++)
 	{
-		start = get_value_at_index(head, i);
-		end = get_value_at_index(head, list_len - 1 - i);
-		if (start != end)
+		if (get_val(head, i) != get_val(head, len - 1 - i))
 			return (0);
 	}
 	return (1);
 }
 
 /**
- * get_value_at_index - Get's value at a given index
+ * get_val - Get's value at a given index
  * @head: Head
  * @idx: index
  * Return: value at the given index
 */
-int get_value_at_index(listint_t **head, int idx)
+int get_val(listint_t **head, int idx)
 {
 	listint_t *temp = *head;
 	int i;
