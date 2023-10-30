@@ -55,7 +55,7 @@ class Rectangle:
 
     def __repr__(self) -> str:
         return "Rectangle({}, {})".format(self.__width, self.__height)
-    
+
     def __del__(self) -> None:
         """Deleted Object"""
         print("Bye rectangle...")
