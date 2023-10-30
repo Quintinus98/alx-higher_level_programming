@@ -32,7 +32,7 @@ class Square:
         """Get's the size"""
         return self.__position
 
-    @size.setter
+    @position.setter
     def position(self, pos):
         """Set's the size"""
         if not isinstance(pos, tuple) or len(pos) != 2:
