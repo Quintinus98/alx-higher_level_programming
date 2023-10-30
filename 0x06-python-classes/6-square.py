@@ -6,12 +6,12 @@ class Square:
     """Represents a Square, with a size"""
     def __init__(self, size=0, position=(0, 0)) -> None:
         """Initializes the data"""
-        self.size = size
-        self.position = position
+        self.__size = size
+        self.__position = position
 
     def area(self):
         """Returns the current square area"""
-        return self.size ** 2
+        return self.__size ** 2
 
     @property
     def size(self):
@@ -29,26 +29,25 @@ class Square:
 
     @property
     def position(self):
-        """Get's the size"""
+        """Get's the position"""
         return self.__position
 
     @position.setter
     def position(self, pos):
-        """Set's the size"""
-        if not isinstance(pos, tuple) or len(pos) != 2:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if not isinstance(pos[0], int) or isinstance(pos[1], int):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if (pos[0] < 0) or (pos[1] < 0):
+        """Set's the position"""
+        if (not isinstance(pos, tuple) or len(pos) != 2 or
+                not isinstance(pos[0], int) or isinstance(pos[1], int) or
+                pos[0] < 0 or pos[1] < 0):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = pos
 
     def my_print(self):
-        if self.size == 0:
+        """Prints # and spaces"""
+        if self.__size == 0:
             print("")
         else:
-            for _ in range(self.position[1]):
+            for _ in range(self.__position[1]):
                 print()
-            for _ in range(self.size):
-                print(" " * self.position[0], end="")
-                print("#" * self.size)
+            for _ in range(self.__size):
+                print(" " * self.__position[0], end="")
+                print("#" * self.__size)
