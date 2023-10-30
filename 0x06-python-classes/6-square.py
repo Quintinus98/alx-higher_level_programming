@@ -4,14 +4,10 @@
 
 class Square:
     """Represents a Square, with a size"""
-    def __init__(self, size=0, position=(0, 0)) -> None:
+    def __init__(self, size=0, position=(0, 0)):
         """Initializes the data"""
         self.__size = size
         self.__position = position
-
-    def area(self):
-        """Returns the current square area"""
-        return self.__size ** 2
 
     @property
     def size(self):
@@ -19,13 +15,13 @@ class Square:
         return self.__size
 
     @size.setter
-    def size(self, size):
+    def size(self, value):
         """Set's the size"""
-        if not isinstance(size, int):
+        if not isinstance(value, int):
             raise TypeError("size must be an integer")
-        if size < 0:
+        if value < 0:
             raise ValueError("size must be >= 0")
-        self.__size = size
+        self.__size = value
 
     @property
     def position(self):
@@ -33,13 +29,17 @@ class Square:
         return self.__position
 
     @position.setter
-    def position(self, pos):
+    def position(self, value):
         """Set's the position"""
-        if (not isinstance(pos, tuple) or len(pos) != 2 or
-                not isinstance(pos[0], int) or isinstance(pos[1], int) or
-                pos[0] < 0 or pos[1] < 0):
+        if (not isinstance(value, tuple) or len(value) != 2 or
+                not isinstance(value[0], int) or isinstance(value[1], int) or
+                value[0] < 0 or value[1] < 0):
             raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = pos
+        self.__position = value
+
+    def area(self):
+        """Returns the current square area"""
+        return self.__size ** 2
 
     def my_print(self):
         """Prints # and spaces"""
