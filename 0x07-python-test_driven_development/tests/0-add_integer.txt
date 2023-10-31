@@ -1,0 +1,29 @@
+>>> add_integer = __import__('0-add_integer').add_integer
+
+>>> len(__import__('0-add_integer').__doc__) > 1
+True
+
+>>> len(__import__('0-add_integer').add_integer.__doc__) > 1
+True
+
+>>> add_integer(1, 2)
+3
+
+>>> add_integer(100, -2)
+98
+
+>>> add_integer(2)
+100
+
+>>> add_integer(100.3, -2)
+98
+
+>>> add_integer(8, -18)
+-10
+
+>>> add_integer(4, "School")
+TypeError('b must be an integer')
+
+>>> add_integer(None)
+TypeError('a must be an integer')
+
