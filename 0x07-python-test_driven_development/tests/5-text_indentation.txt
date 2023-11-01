@@ -1,0 +1,40 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+>>> len(__import__('5-text_indentation').__doc__) > 1
+True
+
+>>> len(__import__('5-text_indentation').text_indentation.__doc__) > 1
+True
+
+>>> text_indentation("Holberton School")
+Holberton School
+
+>>> text_indentation("""Holberton.School""")
+Holberton.
+<BLANKLINE>
+School
+>>> text_indentation("""Holberton. School? How are you: John""")
+Holberton.
+<BLANKLINE>
+School?
+<BLANKLINE>
+How are you:
+<BLANKLINE>
+John
+>>> text_indentation(8)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
+
+>>> text_indentation(True)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
+
+>>> text_indentation()
+Traceback (most recent call last):
+...
+TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+>>> text_indentation("""""")
+
