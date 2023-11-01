@@ -15,12 +15,14 @@ def text_indentation(text):
 
     next = 0
     for ch in text:
-        if ch == '.' or ch == '?' or ch == ":":
-            print(ch, end="\n")
-            print()
-            next = 1
-        else:
-            if next == 1 and ch == ' ':
-                next = 0
+        if next == 0:
+            if ch == ' ':
                 continue
-            print(ch, end="")
+            next = 1
+        if next == 1:
+            if ch == '.' or ch == '?' or ch == ":":
+                print(ch, end="\n")
+                print()
+                next = 0
+            else:
+                print(ch, end="")
