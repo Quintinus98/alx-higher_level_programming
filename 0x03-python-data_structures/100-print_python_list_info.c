@@ -1,18 +1,33 @@
-#define PY_SSIZE_T_CLEAN  /* Make "s#" use Py_ssize_t rather than int. */
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
-// char *print_python_list_info(PyObject *arg)
-// {
-	
-// }
-static PyObject *
-spam_system(PyObject *self, PyObject *args)
+/**
+ * print_python_list_info - Prints python list
+ * @p: A PyObject instance
+*/
+void print_python_list_info(PyObject *p)
 {
-    const char *command;
-    int sts;
+	Py_ssize_t n, allocated, i = 0;
+	PyListObject *listObj = (PyListObject *)p;
+	PyVarObject *varObj = (PyVarObject *)p;
+	const char *item_type;
 
-    if (!PyArg_ParseTuple(args, "s", &command))
-        return NULL;
-    sts = system(command);
-    return PyLong_FromLong(sts);
+	n = varObj->ob_size;
+	allocated = listObj->allocated;
+	fflush(stdout);
+
+	if (strcmp(p->ob_type->tp_name, "list") != 0)
+	{
+		printf("  [ERROR] Invalid List Object\n");
+		return;
+	}
+	printf("[*] Size of the Python List = %ld\n", n);
+	printf("[*] Allocated = %ld\n", allocated);
+
+	while (i < n)
+	{
+		item_type = listObj->ob_item[i]->ob_type->tp_name;
+		printf("Element %ld: %s\n", i, item_type);
+		i++;
+	}
 }
