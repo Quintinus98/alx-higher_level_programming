@@ -3,5 +3,5 @@
 
 
 def inherits_from(obj, a_class):
-    """Same class or sub"""
-    return True if issubclass(obj, a_class) else False
+    """subclass only"""
+    return issubclass(type(obj), a_class) and type(obj) is not a_class
