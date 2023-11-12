@@ -4,6 +4,9 @@
 
 class BaseGeometry:
     """Represents a BaseGeometry Class"""
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
 
     def area(self):
         """defines area of the geometry"""
