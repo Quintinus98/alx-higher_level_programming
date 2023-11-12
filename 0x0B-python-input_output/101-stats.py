@@ -1,43 +1,50 @@
 #!/usr/bin/python3
 """reads stdin line by line and computes metrics"""
-import sys
+
+
+def display_stats(file_size, status_codes):
+    """Print accumulated metrics."""
+    print("File size: {}".format(file_size))
+    for key in sorted(status_codes):
+        print("{}: {}".format(key, status_codes[key]))
 
 
 def main():
-    f_size = 0
-    status_code = {"200": 0, "301": 0, "400": 0, "401": 0,
-                   "403": 0, "404": 0, "405": 0, "500": 0}
-    i = 0
+    file_size = 0
+    status_codes = {}
+    valid_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
+    cnt = 0
+
     try:
-        for a_line in sys.stdin:
-            tok = a_line.split()
-            if len(tok) >= 2:
-                a = i
-                if tok[-2] in status_code:
-                    status_code[tok[-2]] += 1
-                    i += 1
-                try:
-                    f_size += int(tok[-1])
-                    if a == i:
-                        i += 1
-                except FileNotFoundError:
-                    if a == i:
-                        continue
-            if i % 10 == 0:
-                print("File size: {:d}".format(f_size))
-                for key, val in sorted(status_code.items()):
-                    if val:
-                        print("{:s}: {:d}".format(key, val))
-        print("File size: {:d}".format(f_size))
-        for key, val in sorted(status_code.items()):
-            if val:
-                print("{:s}: {:d}".format(key, val))
+        for line in sys.stdin:
+            if cnt == 10:
+                display_stats(file_size, status_codes)
+                cnt = 1
+            else:
+                cnt += 1
+
+            line = line.split()
+            try:
+                file_size += int(line[-1])
+            except (IndexError, ValueError):
+                pass
+
+            try:
+                if line[-2] in valid_codes:
+                    if status_codes.get(line[-2], -1) == -1:
+                        status_codes[line[-2]] = 1
+                    else:
+                        status_codes[line[-2]] += 1
+            except IndexError:
+                pass
+
+        display_stats(file_size, status_codes)
 
     except KeyboardInterrupt:
-        print("File size: {:d}".format(f_size))
-        for key, val in sorted(status_code.items()):
-            if val:
-                print("{:s}: {:d}".format(key, val))
+        display_stats(file_size, status_codes)
+        raise
 
 
-main()
+if __name__ == "__main__":
+    import sys
+    main()
