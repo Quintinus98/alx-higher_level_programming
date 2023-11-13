@@ -77,5 +77,6 @@ class Rectangle(Base):
 
     def __str__(self):
         """String documentation"""
-        return ("({}) {}/{} - {}/{}".format(self.id, self.x, self.y,
-                                            self.width, self.height))
+        doc = "[{}] ({}) ".format(self.__class__.__name__, self.id)
+        return (doc + "{}/{} - {}/{}".format(self.x, self.y,
+                                             self.width, self.height))
