@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Base Class"""
 import json
+import os
 
 
 class Base:
@@ -30,3 +31,32 @@ class Base:
                 list_dict.append(list_objs[i].to_dictionary())
         with open(filename, 'w', encoding='utf-8') as a_file:
             return a_file.write(cls.to_json_string(list_dict))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """returns the list of the JSON string representation json_string"""
+        if json_string is None or len(json_string) == 0:
+            return []
+        return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """returns an instance with all attributes already set"""
+        if cls.__name__ == "Rectangle":
+            instance = cls(1, 1)
+        elif cls.__name__ == "Square":
+            instance = cls(1)
+        else:
+            raise NameError('Cannot match class name')
+        instance.update(**dictionary)
+        return instance
+
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances"""
+        filename = str(cls.__name__) + ".json"
+        if not os.path.exists(filename):
+            return []
+        with open(filename, mode="r", encoding="utf-8") as a_file:
+            my_cls = cls.from_json_string(a_file.read())
+            return [cls.create(**l_dict) for l_dict in my_cls]
