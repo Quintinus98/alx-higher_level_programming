@@ -3,6 +3,7 @@
 import json
 import os
 import csv
+import turtle
 
 
 class Base:
@@ -93,3 +94,12 @@ class Base:
                 dict_attrs = {attrs[i]: int(row[i]) for i in range(len(row))}
                 list_list.append(dict_attrs)
         return [cls.create(**obj) for obj in list_list]
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        # List of rectangles
+        for rect in list_rectangles:
+            x = getattr(rect, "x")
+            y = getattr(rect, "y")
+            print(turtle.setpos(x, y))
+            print()
