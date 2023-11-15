@@ -2,6 +2,7 @@
 """Base Class"""
 import json
 import os
+import csv
 
 
 class Base:
@@ -20,10 +21,11 @@ class Base:
     def to_json_string(list_dictionaries):
         if list_dictionaries is None:
             return "[]"
-        return json.dumps(list_dictionaries)
+        return json.dumps(list_dictionaries, indent=2)
 
     @classmethod
     def save_to_file(cls, list_objs):
+        """ writes the JSON string representation of list_objs to a file"""
         filename = str(cls.__name__) + '.json'
         list_dict = []
         if list_objs is not None:
@@ -60,3 +62,34 @@ class Base:
         with open(filename, mode="r", encoding="utf-8") as a_file:
             my_cls = cls.from_json_string(a_file.read())
             return [cls.create(**l_dict) for l_dict in my_cls]
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """ writes the JSON string representation of list_objs to csv file"""
+        filename = str(cls.__name__) + '.csv'
+        clsList = []
+        if list_objs is not None:
+            clsList = [list(obj.to_dictionary().values()) for obj in list_objs]
+        with open(filename, 'w', encoding='utf-8') as a_file:
+            csv_writer = csv.writer(a_file)
+            for row in clsList:
+                csv_writer.writerow(row)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """returns a list of instances"""
+        filename = str(cls.__name__) + ".csv"
+        list_list = attrs = []
+        if str(cls.__name__) == "Rectangle":
+            attrs = ['id', 'width', 'height', 'x', 'y']
+        else:
+            attrs = ['id', 'size', 'x', 'y']
+        if not os.path.exists(filename):
+            return list_list
+        with open(filename, mode="r", encoding="utf-8") as a_file:
+            csv_reader = csv.reader(a_file)
+            for row in csv_reader:
+                # convert row to dict
+                dict_attrs = {attrs[i]: int(row[i]) for i in range(len(row))}
+                list_list.append(dict_attrs)
+        return [cls.create(**obj) for obj in list_list]
