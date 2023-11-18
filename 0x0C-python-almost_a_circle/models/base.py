@@ -22,7 +22,7 @@ class Base:
     def to_json_string(list_dictionaries):
         if list_dictionaries is None:
             return "[]"
-        return json.dumps(list_dictionaries, indent=2)
+        return json.dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -97,9 +97,36 @@ class Base:
 
     @staticmethod
     def draw(list_rectangles, list_squares):
-        # List of rectangles
+        """Draw rectangles and Squares using the Turtle module"""
+        canv = turtle.Turtle()
+        canv.screen.bgcolor("#b7312c")
+        canv.pensize(3)
+        canv.shape("turtle")
+
+        canv.color("#ffffff")
         for rect in list_rectangles:
-            x = getattr(rect, "x")
-            y = getattr(rect, "y")
-            print(turtle.setpos(x, y))
-            print()
+            canv.showcanvle()
+            canv.up()
+            canv.goto(rect.x, rect.y)
+            canv.down()
+            for i in range(2):
+                canv.forward(rect.width)
+                canv.left(90)
+                canv.forward(rect.height)
+                canv.left(90)
+            canv.hideturtle()
+
+        canv.color("#b5e3d8")
+        for square in list_squares:
+            canv.showturtle()
+            canv.up()
+            canv.goto(square.x, square.y)
+            canv.down()
+            for i in range(2):
+                canv.forward(square.width)
+                canv.left(90)
+                canv.forward(square.height)
+                canv.left(90)
+            canv.hideturtle()
+
+        turtle.exitonclick()
