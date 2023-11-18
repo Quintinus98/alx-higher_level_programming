@@ -8,6 +8,7 @@ from io import StringIO
 from unittest import TestCase
 from unittest.mock import patch
 
+
 class TestBaseMethods(unittest.TestCase):
     """Unittests for base"""
     def clear(self):
@@ -17,7 +18,7 @@ class TestBaseMethods(unittest.TestCase):
         self.clear()
         a = Base()
         self.assertEqual(a.id, 1)
-    
+
     def test_assign_id_prev(self):
         b1 = Base()
         b2 = Base()
@@ -43,11 +44,11 @@ class TestBaseMethods(unittest.TestCase):
 
     def test_to_json_string(self):
         b = Base()
-        self.assertTrue(b.to_json_string([ { 'id': 12 }]))
+        self.assertTrue(b.to_json_string([{'id': 12}]))
 
     def test_to_json_string_returns(self):
         b = Base()
-        self.assertEqual(b.to_json_string([ { 'id': 12 }]), '[{"id": 12}]')
+        self.assertEqual(b.to_json_string([{'id': 12}]), '[{"id": 12}]')
 
     def test_from_json_string_none(self):
         self.assertEqual(Base.from_json_string(None), [])
@@ -83,7 +84,7 @@ class TestBaseMethods(unittest.TestCase):
 
         try:
             os.remove("Square.json")
-        except:
+        except IOError:
             pass
 
         Square.save_to_file([])
@@ -100,7 +101,7 @@ class TestBaseMethods(unittest.TestCase):
                 self.assertEqual(str_out.getvalue(), res)
         try:
             os.remove("Rectangle.json")
-        except:
+        except IOError:
             pass
 
         Rectangle.save_to_file([])
