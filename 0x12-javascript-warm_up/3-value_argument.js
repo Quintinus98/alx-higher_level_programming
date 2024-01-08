@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const argv = process.argv
+const argv = process.argv;
 let state = 0;
 
 argv.forEach((val, index) => {
