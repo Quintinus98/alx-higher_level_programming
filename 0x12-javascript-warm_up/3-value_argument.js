@@ -1,7 +1,7 @@
 #!/usr/bin/node
-const { argv } = require('node:process');
-
+const argv = process.argv
 let state = 0;
+
 argv.forEach((val, index) => {
   if (index >= 2) {
     state = 1;
