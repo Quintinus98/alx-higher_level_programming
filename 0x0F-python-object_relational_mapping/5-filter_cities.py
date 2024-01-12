@@ -12,10 +12,10 @@ def main():
     cur = conn.cursor()
     cur.execute("""SELECT cities.name FROM cities INNER JOIN states ON
                 states.id=cities.state_id WHERE states.name=%s""",
-                (sys.argv[4]))
+                (sys.argv[4],))
     query_rows = cur.fetchall()
-    for row in query_rows:
-        print(row[0], sep=", ")
+    cities = [row[0] for row in query_rows]
+    print(*cities, sep=", ")
 
     cur.close()
     conn.close()
