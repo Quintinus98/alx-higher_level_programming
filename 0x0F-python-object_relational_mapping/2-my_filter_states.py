@@ -10,7 +10,8 @@ def main():
                            passwd=sys.argv[2], db=sys.argv[3], charset="utf8")
 
     cur = conn.cursor()
-    cur.execute("SELECT * FROM states WHERE name={}".format(sys.argv[4]))
+    cur.execute("SELECT * FROM states WHERE name LIKE BINARY '{}'"
+                .format(sys.argv[4]))
 
     query_rows = cur.fetchall()
     for row in query_rows:
