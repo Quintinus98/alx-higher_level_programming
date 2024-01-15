@@ -20,7 +20,6 @@ if __name__ == "__main__":
         states = session.query(State.name, City.id, City.name) \
                               .filter(State.id == City.state_id)
         for row in states:
-            # <state name>: (<city id>) <city name>
             print("{}: {} {}".format(row[0], row[1], row[2]))
     finally:
         session.close()
