@@ -18,9 +18,8 @@ if __name__ == "__main__":
     session = Session()
     try:
         states = session.query(State.name, City.id, City.name) \
-                              .filter(State.id == City.state_id) \
-                              .order_by(City.id)
+                              .filter(State.id == City.state_id)
         for row in states:
-            print("{}: {} {}".format(row[0], row[1], row[2]))
+            print("{}: ({}) {}".format(row[0], row[1], row[2]))
     finally:
         session.close()
