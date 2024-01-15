@@ -17,7 +17,7 @@ if __name__ == "__main__":
     Session = sessionmaker(engine)
     session = Session()
     try:
-        session.add(State(name=sys.argv[4]))
+        session.add(State(name='{sys.argv[4]}'))
         session.commit()
     finally:
         session.close()
