@@ -17,7 +17,9 @@ if __name__ == "__main__":
     Session = sessionmaker(engine)
     session = Session()
     try:
-        session.add(State(name='{sys.argv[4]}'))
+        session.add(State(name='Louisiana'))
         session.commit()
+        state = session.query(State).filter_by(name='Louisiana').first()
+        print("{}".format(state.id))
     finally:
         session.close()
