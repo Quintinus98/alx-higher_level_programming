@@ -11,7 +11,6 @@ def find_peak(list_of_integers):
     if n == 1:
         return arr[0]
     if n == 2:
-        print("I")
         return arr[0] if arr[0] > arr[1] else arr[1]
     for i in range(1, n - 1):
         # first element is greater than its only neighbour
