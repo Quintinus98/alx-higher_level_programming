@@ -10,14 +10,12 @@ def find_peak(list_of_integers):
     n = len(arr)
     if n == 1:
         return arr[0]
-    if n == 2:
-        return arr[0] if arr[0] > arr[1] else arr[1]
-    for i in range(1, n - 1):
+    for i in range(n):
         # first element is greater than its only neighbour
-        if i == 1 and arr[i] < arr[i - 1]:
-            return arr[i - 1]
+        if i == 0 and arr[i] >= arr[i + 1]:
+            return arr[i]
         # last element is greater than its only neighbour
-        if i == n - 1 and arr[i] > arr[i - 1]:
+        if i == n - 1 and arr[i] >= arr[i - 1]:
             return arr[i]
         # It is greater than its left and right neighbours
         if arr[i] >= arr[i - 1] and arr[i] >= arr[i + 1]:
