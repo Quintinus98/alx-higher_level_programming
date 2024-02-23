@@ -1,6 +1,9 @@
-const url = "http://swapi.co/api/people/18/"
 
-id = url.split('/')
+let usersStatus = {};
 
-console.log(id[id.length - 2])
-console.log(url)
+usersStatus['name'] = 1;
+usersStatus['others'] = 2;
+
+
+usersStatus['name'] += 1;
+console.log(usersStatus)
